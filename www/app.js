@@ -6,9 +6,11 @@
 //except for 'app' ones, which are in a sibling
 //directory.
 requirejs.config({
-    baseUrl: 'js/lib',
+    baseUrl: 'lib',
+    urlArgs: 'v=' + window.appVersion,
     paths: {
-        app: '../app'
+        'app': '../app',
+        'page': '../app/page'
     },
     shim: {
         backbone: {
@@ -22,4 +24,13 @@ requirejs.config({
 });
 // Start loading the main app file. Put all of
 // your application logic in there.
-requirejs(['app/main']);
+requirejs(['jquery'], function () {
+    if (window.location.hash && window.location.hash!=='#') {
+        requirejs(['page/' + window.location.hash.substring(1), 'app/boot'], function (page, boot) {
+            boot.render(page);
+        });
+    } else {
+        requirejs(['app/main']);
+    }
+});
+
