@@ -3,6 +3,14 @@
         __getRootElement: function (request) {
             return $('body');
         },
+        __isUnsafeHashPageRendering :function() {
+            if (window.__IS_JCP_USED) {
+                window.location.reload();
+                return true;
+            }
+            window.__IS_JCP_USED = true;
+            return false;
+        },
         generatePageDom: function (page, request) {
             var html = (request && request.runtime && request.runtime.html) || null;
             if (page.jcp.html) {
@@ -61,6 +69,14 @@
                 storage: {}
             };
             if (request.context.page) {
+                if (request.context.page.metadata) {
+                    if (request.context.page.metadata.get) {
+                        var metadata = request.context.page.metadata.get.call(request.context.page);
+                        if (metadata.title) {
+                            window.document.title = metadata.title;
+                        }
+                    }
+                }
                 if (request.context.page.jcp) {
                     /*step1:解析html*/
                     var util = require('app/util');

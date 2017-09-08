@@ -1,5 +1,12 @@
 ﻿define(function (require) {
     return {
+        metadata: {
+            get: function () {
+                return {
+                    title: '登录'
+                }
+            }
+        },
         jcp: {
             js: [
                 {
