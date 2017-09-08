@@ -10,7 +10,8 @@ requirejs.config({
     urlArgs: 'v=' + window.appVersion,
     paths: {
         'app': '../app',
-        'page': '../app/page'
+        'page': '../app/page',
+        'res': '../res'
     },
     shim: {
         backbone: {

@@ -27,6 +27,16 @@
                         return;
                     }
                     if (url) {
+                        if (url === 'login') {
+                            var api = require('app/api');
+                            var authApi = api.getAuthApi();
+                            if (authApi.isExistsTicket()) {
+                                localet.navigate('admin/home', {
+                                    trigger: true
+                                });
+                                return;
+                            }
+                        }
                         var segments = url.split('/');
                         var pageUrl = 'page/' + url + '/' + segments[segments.length - 1] + '-jcp';
                         require([pageUrl], function (page) {

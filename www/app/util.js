@@ -17,6 +17,6 @@
                 }
                 return $.when.apply($, promiseTasks);
             }
-        },
+        }
     };
 });
