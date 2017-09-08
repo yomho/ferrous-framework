@@ -23,6 +23,7 @@
                 },
                 pageWithQuery: function (url, query) {
                     if (localet.__isUnsafeHashPageRendering()) {
+                        /*如果前端使用的第三方框架对window对象有污染性，建议每次解析页面时都刷新一次window来净化windows对象的hook */
                         return;
                     }
                     if (url) {
