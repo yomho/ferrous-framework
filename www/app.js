@@ -24,13 +24,7 @@ requirejs.config({
 });
 // Start loading the main app file. Put all of
 // your application logic in there.
-requirejs(['jquery'], function () {
-    if (window.location.hash && window.location.hash!=='#') {
-        requirejs(['page/' + window.location.hash.substring(1), 'app/boot'], function (page, boot) {
-            boot.render(page);
-        });
-    } else {
-        requirejs(['app/main']);
-    }
+requirejs(['app/program'], function (program) {
+    program.main();
 });
 
